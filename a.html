@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Signup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  /* Reset */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body, html {
+    height: 100%;
+    background: #e6f2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* no scroll */
+  }
+
+  .container {
+    background: #2e7d32;
+    width: 350px;
+    max-height: 600px;
+    padding: 30px 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(46,125,50,0.4);
+    color: #f1f8e9;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    user-select: none;
+    text-align: center;
+  }
+
+  .toggle-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .toggle-tabs button {
+    background: transparent;
+    border: none;
+    color: #c8e6c9;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+
+  .toggle-tabs button.active {
+    color: #a5d6a7;
+    border-color: #aed581;
+  }
+
+  form {
+    display: none;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  form.active {
+    display: flex;
+  }
+
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    outline: none;
+    transition: background-color 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    background-color: #aed581;
+    color: #1b5e20;
+    font-weight: 600;
+  }
+
+  button.submit-btn {
+    background-color: #a5d6a7;
+    color: #1b5e20;
+    border: none;
+    padding: 12px 0;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    box-shadow: 0 4px 12px rgba(165, 214, 167, 0.7);
+  }
+
+  button.submit-btn:hover {
+    background-color: #81c784;
+  }
+
+  /* Info message */
+  .info-message {
+    font-size: 0.9rem;
+    color: #c8e6c9;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    min-height: 18px;
+    user-select: none;
+  }
+
+  /* Additional login methods container */
+  .additional-login {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .additional-login p {
+    font-size: 0.9rem;
+    color: #c8e6c9;
+    user-select: none;
+    margin-bottom: 12px;
+  }
+
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .social-btn {
+    background-color: #4caf50;
+    border-radius: 10px;
+    padding: 8px 0;
+    width: 100px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(76,175,80,0.7);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+
+  .social-btn:hover {
+    background-color: #388e3c;
+  }
+
+  /* Using simple icons from SVG inline */
+  .social-icon {
+    height: 18px;
+    width: 18px;
+    fill: white;
+  }
+
+  /* Responsive adjustments */
+  @media (max-height: 600px) {
+    .container {
+      height: 100%;
+      max-height: none;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .container {
+      width: 95vw;
+      padding: 25px 20px 35px;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    .toggle-tabs button {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+    .social-btn {
+      width: 85px;
+      font-size: 0.8rem;
+      padding: 7px 0;
+      gap: 4px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container" id="auth-container">
+    <h2>Welcome</h2>
+    <div class="toggle-tabs">
+      <button id="login-tab" class="active" aria-selected="true">Login</button>
+      <button id="signup-tab" aria-selected="false">Signup</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="active">
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" name="login-email" required />
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" name="login-password" required />
+      <div class="info-message" id="login-info"></div>
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signup-form">
+      <label for="signup-name">Full Name</label>
+      <input type="text" id="signup-name" name="signup-name" required />
+      <label for="signup-email">Email</label>
+      <input type="email" id="signup-email" name="signup-email" required />
+      <label for="signup-password">Password</label>
+      <input type="password" id="signup-password" name="signup-password" required />
+      <div class="info-message" id="signup-info"></div>
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+
+    <div class="additional-login">
+      <p>Or sign in with:</p>
+      <div class="social-buttons">
+        <button class="social-btn">
+          <!-- Replace with icon if desired -->
+          <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M21.35 11.1h-9.17v2.92h5.78c-.25 1.37-1.45 4.02-5.78 4.02-3.48 0-6.32-2.86-6.32-6.38s2.84-6.38 6.32-6.38c1.99 0 3.32.86 4.08 1.6l2.8-2.7C17.6 2.63 15.14 1.5 12.18 1.5 6.7 1.5 2.2 6 2.2 11.5s4.5 10 9.98 10c5.75 0 9.54-4.03 9.54-9.74 0-.76-.07-1.34-.18-1.66z"/>
+          </svg>
+          Google
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const loginTab = document.getElementById('login-tab');
+      const signupTab = document.getElementById('signup-tab');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const loginInfo = document.getElementById('login-info');
+      const signupInfo = document.getElementById('signup-info');
+
+      function activateLogin() {
+        loginTab.classList.add('active');
+        loginTab.setAttribute('aria-selected', 'true');
+        loginTab.tabIndex = 0;
+        signupTab.classList.remove('active');
+        signupTab.setAttribute('aria-selected', 'false');
+        signupTab.tabIndex = -1;
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+      }
+
+      function activateSignup() {
+        signupTab.classList.add('active');
+        signupTab.setAttribute('aria-selected', 'true');
+        signupTab.tabIndex = 0;
+        loginTab.classList.remove('active');
+        loginTab.setAttribute('aria-selected', 'false');
+        loginTab.tabIndex = -1;
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+      }
+
+      function clearMessages() {
+        loginInfo.textContent = '';
+        signupInfo.textContent = '';
+      }
+
+      function validateEmail(email) {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+
+      loginTab.addEventListener('click', () => {
+        activateLogin();
+        clearMessages();
+      });
+
+      signupTab.addEventListener('click', () => {
+        activateSignup();
+        clearMessages();
+      });
+
+      // Signup form submit
+      signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearMessages();
+
+        const name = document.getElementById('signup-name').value.trim();
+        const email = document.getElementById('signup-email').value.trim().toLowerCase();
+        const password = document.getElementById('signup-password').value;
+
+        if (!name || !email || !password) {
+          signupInfo.textContent = 'Please fill in all fields.';
+          return;
+        }
+
+        if (!validateEmail(email)) {
+          signupInfo.textContent = 'Please enter a valid email address.';
+          return;
+        }
+
+        // Check if user exists
+        if (localStorage.getItem('user_' + email)) {
+          signupInfo.textContent = 'An account with this email already exists.';
+          return;
+        }
+
+        // Save user
+        const userData = {
+          name,
+          email,
+          password // NOTE: In production, NEVER store passwords in plain text!
+        };
+        localStorage.setItem('user_' + email, JSON.stringify(userData));
+        signupInfo.style.color = '#a5d6a7';
+        signupInfo.textContent = 'Account created successfully! You can now log in.';
+
+        // Clear signup inputs
+        signupForm.reset();
+
+        // Automatically switch to login tab after short delay
+        setTimeout(() => {
+          activateLogin();
+          clearMessages();
+        }, 1500);
+      });
+
+      // Login form submit
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearMessages();
+
+        const email = document.getElementById('login-email').value.trim().toLowerCase();
+        const password = document.getElementById('login-password').value;
+
+        if (!email || !password) {
+          loginInfo.textContent = 'Please fill in all fields.';
+          return;
+        }
+
+        if (!validateEmail(email)) {
+          loginInfo.textContent = 'Please enter a valid email address.';
+          return;
+        }
+
+        const storedUserJSON = localStorage.getItem('user_' + email);
+        if (!storedUserJSON) {
+          loginInfo.textContent = 'No account found with this email.';
+          return;
+        }
+
+        const storedUser = JSON.parse(storedUserJSON);
+
+        if (storedUser.password !== password) {
+          loginInfo.textContent = 'Incorrect password.';
+          return;
+        }
+
+        // Success: redirect or show message
+        loginInfo.style.color = '#a5d6a7';
+        loginInfo.textContent = 'Login successful! Redirecting...';
+
+        // Set logged-in user in localStorage for header display
+        localStorage.setItem('user', JSON.stringify({ email }));
+
+        // Simulate redirect after 1 second
+        setTimeout(() => {
+          window.location.href = 'index.html'; // Change as needed
+        }, 1000);
+      });
+
+    })();
+  </script>
+</body>
+</html>

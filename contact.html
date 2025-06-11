@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+
+    header {
+      background-color: #1f2937;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #111827;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .info, .form {
+      flex: 1 1 45%;
+      margin: 1rem 0;
+    }
+
+    .info p {
+      margin: 0.5rem 0;
+    }
+
+    .form input, .form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form button:hover {
+      background-color: #1e40af;
+    }
+
+    @media (max-width: 768px) {
+      .contact-info {
+        flex-direction: column;
+      }
+
+      .info, .form {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+  <div class="container">
+    <h2>We'd love to hear from you</h2>
+    <div class="contact-info">
+      <div class="info">
+        <h3>Our Office</h3>
+        <p><strong>Address:</strong> Relocation Street, P-6, Hubang, San Francisco Agusan Del Sur</p>
+        <p><strong>Email:</strong> liamorfano66@example.com</p>
+        <p><strong>Phone:</strong> +63 985 149 4964</p>
+      </div>
+<!-- Change the form section to this -->
+<div class="form">
+  <form action="https://formspree.io/f/myzwqgbl" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+</body>
+</html>

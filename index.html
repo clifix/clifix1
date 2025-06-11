@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClixFix 🌱 | Eco-Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="icon" href=" ChatGPT_Image_May_22__2025__04_31_48_PM-removebg-preview.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span>ClixFix 🌱</span>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#weather">Weather</a></li>
+                    <li><a href="#air-quality">Air Quality</a></li>
+                    <li><a href="#climate-report">Climate Report</a></li>
+                    <li><a href="#eco-tips">Eco Tips</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li id="user-area" class="login-btn">
+                    <a href="a.html" id="login-link">Login</a>
+                    <button id="logout-button" class="logout-btn">Logout</button>
+                    </li>
+                </ul>
+                    <div class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </div>
+            </nav>
+        </div>
+    </header>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>Track Your Weather, Protect Your Planet</h1>
+        <div class="real-time-weather">
+          <div class="weather-summary">
+            <div class="temp" id="hero-temp">--°C</div>
+            <div class="conditions">
+              <i class="fas fa-sun" id="hero-icon"></i>
+              <span id="hero-condition">Loading...</span>
+            </div>
+          </div>
+          <div class="aqi-summary">
+            <div class="aqi-value-large" id="hero-aqi-value">--</div>
+            <div class="aqi-category" id="hero-aqi-category">Loading...</div>
+          </div>
+        </div>
+        <button class="cta-btn">Track Your Eco Impact</button>
+      </div>
+    </div>
+  </section>
+
+
+    <main class="main-content">
+        <section id="weather" class="section weather-dashboard">
+            <div class="container">
+                <h2>Real-Time Weather Dashboard</h2>
+                <div class="location-search">
+                    <input type="text" placeholder="Enter location...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="weather-cards">
+                    <div class="card today-weather">
+                        <h3>Today</h3>
+                        <div class="weather-details">
+                            <i class="fas fa-sun"></i>
+                            <div class="temp-range">
+                                <span class="max">28°C</span>
+                                <span class="min">18°C</span>
+                            </div>
+                            <div class="humidity">
+                                <i class="fas fa-tint"></i> 65%
+                            </div>
+                            <div class="wind">
+                                <i class="fas fa-wind"></i> 12 km/h
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card hourly-weather">
+                        <h3>Hourly Forecast</h3>
+                        <div class="hourly-scroll">
+                            </div>
+                    </div>
+                    
+                    <div class="card weekly-weather">
+                        <h3>7-Day Forecast</h3>
+                        <div class="weekly-list">
+                            </div>
+                    </div>
+                </div>
+                
+                <div class="weather-map">
+                    <h3>Interactive Weather Map</h3>
+                    <div id="map" style="height: 400px; border-radius: 10px; margin-top: 20px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="climate-impact" class="section climate-tracker">
+    <div class="container">
+        <h2>My Eco Impact</h2>
+        
+        <div class="login-prompt" id="login-prompt">
+            <p>Login to track your eco-friendly actions and see your impact!</p>
+            <a href="a.html" class="cta-btn">Login Now</a>
+        </div>
+        
+        <div class="tracker-dashboard" style="display: none;">
+            <!-- User Profile Card -->
+            <div class="profile-card">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <h3 id="username-display">Eco Warrior</h3>
+                    <div class="badges">
+                        <span id="rank-badge" class="badge bronze">Bronze</span>
+                        <span class="badge streak">3-day streak</span>
+                        <span class="badge tree planted">1 <i class="fas fa-tree"></i> planted</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Impact Stats Overview -->
+            <div class="impact-overview">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Carbon Saved</h4>
+                        <div class="stat-value" id="carbon-saved">12.5 kg</div>
+                        <div class="stat-comparison">≈ 3 trees planted</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Energy Saved</h4>
+                        <div class="stat-value" id="energy-saved">45 kWh</div>
+                        <div class="stat-comparison">≈ 3 days of TV</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Water Saved</h4>
+                        <div class="stat-value" id="water-saved">120 L</div>
+                        <div class="stat-comparison">≈ 8 showers</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progress Visualization -->
+            <div class="progress-visualization">
+                <div class="progress-card">
+                    <h3>Your Green Score</h3>
+                    <div class="circular-progress">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring-circle" stroke-width="10" fill="transparent" r="50" cx="60" cy="60"/>
+                            <circle class="progress-ring-fill" stroke-width="10" stroke-dasharray="314" stroke-dashoffset="157" fill="transparent" r="50" cx="60" cy="60"/>
+                        </svg>
+                        <div class="progress-value" id="green-score">85</div>
+                    </div>
+                    <p class="progress-text">Keep going! You're doing great!</p>
+                </div>
+                
+                <div class="progress-card">
+                    <h3>Weekly Challenge</h3>
+                    <div class="challenge-info">
+                        <p id="challenge-description">Reduce plastic use by 50% this week</p>
+                        <div class="progress-bar">
+                            <div class="progress" id="challenge-progress" style="width: 30%;"></div>
+                        </div>
+                        <div class="challenge-stats">
+                            <span id="challenge-current">3</span>/<span id="challenge-target">10</span> actions completed
+                        </div>
+                    </div>
+                    <button class="action-btn" id="claim-reward-btn" disabled>Claim Reward (5/10)</button>
+                </div>
+            </div>
+            
+            <!-- Action Cards -->
+            <div class="actions-header">
+                <h3>Log Your Eco Actions</h3>
+                <div class="streak-counter">
+                    <i class="fas fa-fire"></i>
+                    <span id="streak-count">3-day streak</span>
+                </div>
+            </div>
+            
+            <div class="actions-grid">
+                <!-- Action cards will be inserted here by JavaScript -->
+            </div>
+            
+            <!-- Achievements Section -->
+            <div class="achievements-section">
+                <h3>Your Achievements</h3>
+                <div class="achievements-grid">
+                    <div class="achievement unlocked">
+                        <div class="achievement-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>Green Starter</h4>
+                            <p>Logged your first eco action</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked">
+                        <div class="achievement-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>Eco Champion</h4>
+                            <p>Complete 50 actions</p>
+                        </div>
+                    </div>
+                    <div class="achievement locked">
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="achievement-info">
+                            <h4>Planet Hero</h4>
+                            <p>Reach 1000kg CO₂ saved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Impact Timeline -->
+            <div class="impact-timeline">
+                <h3>Your Impact History</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Today</div>
+                        <div class="timeline-content">
+                            <i class="fas fa-bicycle"></i>
+                            <p>Biked to work (saved 2kg CO₂)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Yesterday</div>
+                        <div class="timeline-content">
+                            <i class="fas fa-recycle"></i>
+                            <p>Recycled 5 items (saved 1kg CO₂)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2 days ago</div>
+                        <div class="timeline-content">
+                            <i class="fas fa-utensils"></i>
+                            <p>Vegetarian meal (saved 3kg CO₂)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="air-quality" class="section air-quality">
+  <div class="container">
+    <h2>Air Quality Index</h2>
+    <div class="aqi-container">
+      <div class="aqi-main">
+        <div class="aqi-value-large" id="aqi-value">--</div>
+        <div class="aqi-category" id="aqi-category">Loading...</div>
+        <div class="health-advice" id="aqi-advice">Fetching air quality...</div>
+      </div>
+
+      <div class="aqi-gauge">
+        <canvas id="aqiGauge" width="200" height="200"></canvas>
+      </div>
+
+      <div class="aqi-trends">
+        <h3>Past 3 Days Trend</h3>
+        <canvas id="aqiTrendChart" width="280" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="climate-report" class="section climate-report">
+    <div class="container">
+        <h2>Weekly Climate Report</h2>
+
+        <!-- New location display -->
+        <p id="location-display" class="location-text">Location: Detecting...</p>
+
+        <div class="report-cards">
+            <div class="card">
+                <h3>Local Temperature Changes</h3>
+                <canvas id="tempChart" width="300" height="200"></canvas>
+                <p id="temp-change-summary">Loading temperature data...</p>
+            </div>
+
+            <div class="card">
+                <h3>Global CO₂ Levels</h3>
+                <canvas id="co2Chart" width="300" height="200"></canvas>
+                <p id="co2-level">Current: 417 ppm (Static Data)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="eco-tips" class="section eco-tips">
+    <div class="container">
+        <h2>Eco-Friendly Suggestions</h2>
+        <div class="tip-card">
+            <div class="tip-content">
+                <h3>Daily Eco Tip</h3>
+                <p id="daily-tip" class="tip-text">Loading tip...</p>
+                <div class="weather-based-tip">
+                    <i class="fas fa-cloud-sun"></i>
+                    <p id="weather-tip">Fetching weather-based tip...</p>
+                </div>
+            </div>
+            <div class="tip-products">
+                <h4>Recommended Products</h4>
+                <div class="product-scroll" id="product-scroll">
+                    <!-- Products will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section tree-stats">
+  <div class="container">
+    <div class="stats-content">
+      <h2><i class="fas fa-seedling"></i> <span id="global-tree-count">1</span> Trees Planted So Far!</h2>
+      <p>Thanks to our community's efforts in reducing carbon footprint</p>
+
+      <div class="user-contributions">
+        <!-- User cards will be added dynamically -->
+      </div>
+
+      <a href="https://onetreeplanted.org" target="_blank" rel="noopener noreferrer">
+        <button class="cta-btn">Join & Plant a Tree</button>
+      </a>
+    </div>
+  </div>
+</section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-media">
+                <a href="https://www.facebook.com/profile.php?id=61576675981355"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="about us.html">About Us</a>
+                <a href="privacy policy.html">Privacy Policy</a>
+                <a href="terms and service.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="footer-tagline">
+                Built with <i class="fas fa-heart"></i> for the Planet
+            </div>
+        </div>
+    </footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<script type="module" src="weather-updated.js"></script>
+<script type="module" src="ecoTracker.js"></script>
+<script src="map-layer-toggle.js"></script>
+<script src="aqi.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="climatereport.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

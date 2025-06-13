@@ -1637,8 +1637,8 @@ button {
 /* Make sure button stays visible on tiny screens */
 @media (max-width: 320px) {
     .mobile-menu-btn {
-        top: 15px;
-        right: 14px;
+        top: 10px;
+        right: 10px;
         width: 40px;
         height: 40px;
         font-size: 20px;

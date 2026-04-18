@@ -4,110 +4,285 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact Us</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="images.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'DM Sans', sans-serif;
     }
 
     body {
       margin: 0;
-      padding: 0;
-      background-color: #f3f4f6;
+      padding: 20px;
+      background-image: url('Soothing-nature-backgrounds-2.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    header {
-      background-color: #1f2937;
-      color: #fff;
-      padding: 1rem 2rem;
-      text-align: center;
+    .arrow-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 100px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .arrow-icon a{
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin: 0 0 0.5rem 0;
+      color: #000;
     }
 
     h2 {
-      text-align: center;
-      color: #111827;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
     }
 
-    .contact-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-bottom: 2rem;
+    .form-group {
+      margin-bottom: 1rem;
     }
 
-    .info, .form {
-      flex: 1 1 45%;
-      margin: 1rem 0;
-    }
-
-    .info p {
-      margin: 0.5rem 0;
+    .mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      display: block;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .form input, .form textarea {
       width: 100%;
-      padding: 0.75rem;
-      margin: 0.5rem 0 1rem 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #000;
+      outline: none;
     }
 
     .form button {
-      background-color: #2563eb;
       color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
+      padding: 0.8rem;
+      border-radius: 50px;
       cursor: pointer;
+      width: 100%;
+      background-color: #000;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: transform 0.2s;
+      margin-top: 10px;
     }
 
     .form button:hover {
-      background-color: #1e40af;
+      transform: scale(1.02);
+      background-color: #222;
     }
 
-    @media (max-width: 768px) {
-      .contact-info {
-        flex-direction: column;
-      }
+    .form button:disabled {
+      background-color: #666;
+      cursor: not-allowed;
+    }
 
-      .info, .form {
-        flex: 1 1 100%;
-      }
+    .form-success {
+      display: none;
+      text-align: center;
+      color: #006400;
+      background: rgba(144, 238, 144, 0.3);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+
+    .form-success.visible {
+      display: block;
+    }
+
+    /* Social Icons */
+    .icon { 
+      display: flex;
+      gap: 15px; 
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .icon a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .icon a:hover {
+      color: #fff;
+      background-color: #000;
+      transform: translateY(-3px);
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Contact Us</h1>
-  </header>
+  <div class="arrow-icon">
+    <a href="clifix.html"><i class="fa-solid fa-arrow-left"></i></a>
+  </div>
 
-  <div class="container">
-    <h2>We'd love to hear from you</h2>
-    <div class="contact-info">
-      <div class="info">
-        <h3>Our Office</h3>
-        <p><strong>Address:</strong> Relocation Street, P-6, Hubang, San Francisco Agusan Del Sur</p>
-        <p><strong>Email:</strong> liamorfano66@example.com</p>
-        <p><strong>Phone:</strong> +63 985 149 4964</p>
+<div class="container">
+  <h1>Contact Us</h1>
+  <h2>We'd love to hear from you</h2>
+  
+  <div class="form">
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="name" class="mono">Your Name</label>
+        <input type="text" id="name" placeholder="John Doe" required>
       </div>
-<!-- Change the form section to this -->
-<div class="form">
-  <form action="https://formspree.io/f/myzwqgbl" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+
+      <div class="form-group">
+        <label for="email" class="mono">Email Address</label>
+        <input type="email" id="email" placeholder="john@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message" class="mono">Message</label>
+        <textarea id="message" rows="4" placeholder="How can I help?" required></textarea>
+      </div>
+
+      <button type="submit">
+        <span>Send Message</span>
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+
+      <div class="form-success" id="form-success">
+        <i class="fa-solid fa-circle-check"></i> Message sent successfully!
+      </div>
+
+      <div class="icon">
+        <a href="https://www.linkedin.com/in/liam-orfano-542444403/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/Batch2022-2026" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.facebook.com/liam.orfano.2025" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://x.com/LiamOrfano" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+    </form>
+  </div>
 </div>
+
+<script>
+/* -----CONTACT FORM----- */
+const form = document.getElementById('contact-form');
+const formSuccess = document.getElementById('form-success');
+
+// Your Bot Details
+const botToken = "8713802557:AAHPoJRwi4rLWJ_I5i8XjoCLjrhQgFoZjb8"; 
+const chatId = "8209417976";
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const btn = form.querySelector('button[type="submit"]');
+    const originalHTML = btn.innerHTML;
+    
+    // Change button state
+    btn.innerHTML = '<span>Sending...</span><i class="fa-solid fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+
+    // Get input values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Format the message for Telegram 
+    // (Removed 'subject' since it's not in your HTML)
+    const text = `🚀 *New Work Request!*%0A%0A` +
+                 `*Name:* ${encodeURIComponent(name)}%0A` +
+                 `*Email:* ${encodeURIComponent(email)}%0A%0A` +
+                 `*Message:* ${encodeURIComponent(message)}`;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${text}&parse_mode=Markdown`;
+
+    try {
+        const response = await fetch(url);
+        
+        if (response.ok) {
+            // Reset form and show success UI
+            form.reset();
+            formSuccess.classList.add('visible');
+            
+            // Revert button after a small delay
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }, 1000);
+
+            // Hide success message after 5 seconds
+            setTimeout(() => formSuccess.classList.remove('visible'), 5000);
+        } else {
+            const errorData = await response.json();
+            console.error("Telegram API Error:", errorData);
+            throw new Error('Telegram API Error');
+        }
+    } catch (error) {
+        console.error("Error sending to Telegram:", error);
+        alert("Oops! There was an issue sending your message. Please try again.");
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+    }
+});
+</script>
 </body>
 </html>
